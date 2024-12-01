@@ -1,45 +1,48 @@
 def heapify(arr, n, i):
-    largest = i  # Инициализируем наибольший элемент как корень
-    l = 2 * i + 1  # Левый потомок
-    r = 2 * i + 2  # Правый потомок
+    """
+    Преобразует поддерево с корнем в индексе i в двоичную кучу.
 
-    # Если левый потомок больше корня
+    :param arr: Массив для преобразования.
+    :param n: Размер кучи.
+    :param i: Индекс корня поддерева.
+    """
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
     if l < n and arr[l] > arr[largest]:
         largest = l
 
-    # Если правый потомок больше, чем самый большой элемент на данный момент
     if r < n and arr[r] > arr[largest]:
         largest = r
 
-    # Если самый большой элемент не корень
     if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]  # Меняем местами
-
-        # Рекурсивно преобразуем в двоичную кучу затронутое поддерево
+        arr[i], arr[largest] = arr[largest], arr[i]
         heapify(arr, n, largest)
 
 def heap_sort(arr):
+    """
+    Сортирует массив методом пирамидальной сортировки.
+
+    :param arr: Массив для сортировки.
+    """
     n = len(arr)
 
-    # Построение максимальной кучи
     print("Построение максимальной кучи:")
     for i in range(n // 2 - 1, -1, -1):
         heapify(arr, n, i)
         print(arr)
 
-    # Один за другим извлекаем элементы
     print("\nИзвлечение элементов:")
     for i in range(n - 1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]  # Меняем местами
+        arr[i], arr[0] = arr[0], arr[i]
         print(f"Меняем местами {arr[i]} и {arr[0]}: {arr}")
         heapify(arr, i, 0)
         print(arr)
 
-# Ввод ФИО с клавиатуры
 full_name = input("Введите ФИО студента: ")
-letters = [char for char in full_name[:12] if char != ' ']  # Берем первые 12 символов и удаляем пробелы
+letters = [char for char in full_name[:12] if char != ' ']
 print("Исходный массив без пробелов:", letters)
 
-# Сортировка массива
 heap_sort(letters)
 print("\nОтсортированный массив без пробелов:", letters)

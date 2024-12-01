@@ -2,6 +2,11 @@ import random
 import time
 
 def bubble_sort(arr):
+    """
+    Сортирует массив методом пузырьковой сортировки.
+
+    :param arr: Массив для сортировки.
+    """
     n = len(arr)
     for i in range(n):
         swapped = False
@@ -13,13 +18,17 @@ def bubble_sort(arr):
             break
 
 def shaker_sort(arr):
+    """
+    Сортирует массив методом шейкерной сортировки.
+
+    :param arr: Массив для сортировки.
+    """
     n = len(arr)
     swapped = True
     start = 0
     end = n - 1
     while swapped:
         swapped = False
-        # Проход слева направо
         for i in range(start, end):
             if arr[i] > arr[i + 1]:
                 arr[i], arr[i + 1] = arr[i + 1], arr[i]
@@ -28,7 +37,6 @@ def shaker_sort(arr):
             break
         swapped = False
         end -= 1
-        # Проход справа налево
         for i in range(end - 1, start - 1, -1):
             if arr[i] > arr[i + 1]:
                 arr[i], arr[i + 1] = arr[i + 1], arr[i]
@@ -36,12 +44,26 @@ def shaker_sort(arr):
         start += 1
 
 def measure_time(sort_func, arr):
+    """
+    Измеряет время выполнения сортировки.
+
+    :param sort_func: Функция сортировки.
+    :param arr: Массив для сортировки.
+    :return: Время выполнения сортировки.
+    """
     start_time = time.time()
     sort_func(arr)
     end_time = time.time()
     return end_time - start_time
 
 def generate_array(size, order='random'):
+    """
+    Генерирует массив заданного размера и порядка.
+
+    :param size: Размер массива.
+    :param order: Порядок элементов ('ascending', 'descending', 'random').
+    :return: Сгенерированный массив.
+    """
     if order == 'ascending':
         return list(range(size))
     elif order == 'descending':
@@ -50,25 +72,25 @@ def generate_array(size, order='random'):
         return [random.randint(0, size) for _ in range(size)]
 
 def manual_sort():
-    # Запрашиваем ФИО с клавиатуры
+    """
+    Выполняет ручную сортировку введенного ФИО с использованием пузырьковой и шейкерной сортировок.
+    """
     full_name = input("Введите ваше ФИО: ")
-    # Извлекаем первые 12 символов
     name_chars = list(full_name[:12])
     
-    # Создаем копии для сортировки
     bubble_name_chars = name_chars.copy()
     shaker_name_chars = name_chars.copy()
     
-    # Выполняем пузырьковую сортировку
     bubble_sort(bubble_name_chars)
     print("Результат пузырьковой сортировки:", ''.join(bubble_name_chars))
     
-    # Выполняем шейкерную сортировку
     shaker_sort(shaker_name_chars)
     print("Результат шейкерной сортировки:", ''.join(shaker_name_chars))
 
 def main():
-    # Выполняем ручную сортировку
+    """
+    Основная функция для выполнения ручной сортировки и сравнения времени выполнения пузырьковой и шейкерной сортировок.
+    """
     manual_sort()
     
     sizes = [100, 1000, 10000]
