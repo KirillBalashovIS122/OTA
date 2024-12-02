@@ -56,16 +56,7 @@ def draw_graph(graph, start_node, end_node, shortest_path=None):
         for neighbor, weight in neighbors.items():
             G.add_edge(node, neighbor, weight=weight)
     
-    pos = {
-        0: (-1, 0),
-        1: (-0.5, 0.5),
-        2: (0.5, 0.5),
-        3: (0.5, 1),
-        4: (-0.5, -0.5),
-        5: (0, -0.5),
-        6: (1, 0),
-        7: (-0.5, 0)
-    }
+    pos = nx.spring_layout(G)
     
     nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=700, edgecolors='black')
     nx.draw_networkx_edges(G, pos, edge_color='gray', width=2.5)
